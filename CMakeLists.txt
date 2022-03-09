@@ -21,34 +21,32 @@ else()
 endif()
 
 
-  project(2d_engine)
+project(2d_engine)
 
-  ## ------- Set Vars ------- #
-  set(CMAKE_CXX_STANDARD  20)
-  set(CMAKE_CXX_STANDARD_REQUIRED ON)
-  set(CMAKE_CXX_EXTENSIONS OFF)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+## ------- Set Vars ------- #
+set(CMAKE_CXX_STANDARD  20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/include/")
 
-  add_executable(2d_engine src/main.cpp)
+add_executable(2d_engine src/main.cpp)
 
-  find_package(SDL2 REQUIRED)
-  Message("")
-  Message( STATUS "FINDING SDL2" )
-  if (${SDL2_FOUND})
-    Message( STATUS "SDL2_FOUND: " ${SDL2_FOUND})
-    Message( STATUS "SDL2_INCLUDE_DIR:" ${SDL2_INCLUDE_DIRS})
-    Message( STATUS "SDL2_LIBRARY: " ${SDL2_LIBRARIES})
-  else()
-    Message( STATUS "SDL2_FOUND: " ${SDL2_FOUND})
-    Message( FATAL_ERROR "SDL2 NOT FOUND" )
-  endif()
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
-  Message( STATUS "SDL2_IMAGE_LIBRARY: " ${SDL2_IMAGE_LIBRARIES})
- # find_package(SDL2_IMAGE REQUIRED)
-  Message( STATUS "SDL2_IMAGE_FOUND: " ${SDL2_IMAGE_FOUND})
-  INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
-  TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARIES})
+#message("")
+#message( STATUS "FINDING SDL2" )
+#message( STATUS "SDL2_FOUND: " ${SDL2_FOUND})
+#message( STATUS "SDL2_INCLUDE_DIR:" ${SDL2_INCLUDE_DIRS})
+#message( STATUS "SDL2_LIBRARY: " ${SDL2_LIBRARIES})
+#message( STATUS "SDL2_IMAGE_LIBRARY: " ${SDL2_IMAGE_LIBRARIES})
+#message( STATUS "SDL2_IMAGE_FOUND: " ${SDL2_IMAGE_FOUND})
+
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL_IMAGE_LIBARIES})
 
   #
   #set(SOURCE_FILES    src/main.cpp)
